@@ -126,7 +126,6 @@ def main():
                                                 timeMax=next_day_end.isoformat(),
                                                 singleEvents=True, orderBy='startTime').execute()
     events = events_result.get('items', [])
-    
     tutoring_events = []
     if not events:
         print('No upcoming events on calendar.')
@@ -179,7 +178,10 @@ def main():
             student_email = ""
             for attendee in event['attendees']:
                 if attendee['email'] != TUTOR_EMAIL: # 2 attendees, ignore tutor
-                    student_email = attendee['email']
+                    if attendee['email'] == 'epozzi5@yahoo.com':
+                        student_email = 'emilypozziphoto@gmail.com'
+                    else:
+                        student_email = attendee['email']
             #Lookup email in Sheets data
             while student_email != 'skip' and student_email not in student_data:
                 print(f"Email {student_email} not found. If you know who this is, please supply the email address they registered with or enter 'skip' to skip to the next session.")

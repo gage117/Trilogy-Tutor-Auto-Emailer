@@ -1,4 +1,4 @@
-PATH_TO_MSG_TEMPLATE = 'msg_template.html' - #String - file path to msg_template.html (modify as needed)
+PATH_TO_MSG_TEMPLATE = 'msg_template.html' #String - file path to msg_template.html (modify as needed)
 SUBJECT_TEMPLATE = #String - desired subject line containing the placeholder variables $date, $starttime, and $endtime
 """
 Example:
