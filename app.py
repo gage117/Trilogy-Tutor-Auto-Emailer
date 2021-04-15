@@ -178,8 +178,8 @@ def main():
             student_email = ""
             for attendee in event['attendees']:
                 if attendee['email'] != TUTOR_EMAIL: # 2 attendees, ignore tutor
-                    if attendee['email'] == 'epozzi5@yahoo.com':
-                        student_email = 'emilypozziphoto@gmail.com'
+                    if attendee['email'] == 'tejspl@gmail.com':
+                        student_email = 'tejeshpatel@live.com'
                     else:
                         student_email = attendee['email']
             #Lookup email in Sheets data
