@@ -179,9 +179,6 @@ def main():
     
     output_document = Document()
 
-    # Keep track of what the current index of the last appended template is
-    current_template_index = 0
-
     for event in tutoring_events:
         if event['id'] not in already_sent:
             student_email = ""
@@ -258,8 +255,6 @@ def main():
             output_document.add_paragraph("")
             output_document.add_paragraph("------------------------------------------------")
             output_document.add_paragraph("")
-
-            # Increment current_template_index
 
 
 
