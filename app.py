@@ -255,6 +255,9 @@ def main():
             print(len(output_document.paragraphs))
 
             # Add Separation lines between templates on output_document
+            output_document.add_paragraph("")
+            output_document.add_paragraph("------------------------------------------------")
+            output_document.add_paragraph("")
 
             # Increment current_template_index
 
