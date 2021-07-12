@@ -18,8 +18,11 @@ import json
 #APIclient
 from apiclient import errors
 
+#Docx
+from docx import Document
+
 #USER VARIABLES
-from config import * # (DON'T DO THIS IN PRODUCTION-GRADE CODE)
+from config import * #! (DON'T DO THIS IN PRODUCTION-GRADE CODE)
 
 def createTemplates():
     """Create email Template objects"""
@@ -173,11 +176,18 @@ def main():
     
     # Send confirmation email for each event
     messages_sent = []
+    
+    output_document = Document()
+
+    # Keep track of what the current index of the last appended template is
+    current_template_index = 0
+
     for event in tutoring_events:
         if event['id'] not in already_sent:
             student_email = ""
             for attendee in event['attendees']:
                 if attendee['email'] != TUTOR_EMAIL: # 2 attendees, ignore tutor
+                    #* Put any email discrepencies in this if statement
                     if attendee['email'] == 'tejspl@gmail.com':
                         student_email = 'tejeshpatel@live.com'
                     else:
@@ -230,10 +240,28 @@ def main():
                 message = CreateMessage(sender=TUTOR_SENDER, to=TEST_EMAIL, subject=subject_text, message_text=msg_text)
             else:
                 message = CreateMessage(sender=TUTOR_SENDER, to=student_email, subject=subject_text, message_text=msg_text, cc='centraltutorsupport@bootcampspot.com')
-                
-            SendMessage(gmail_svc, 'me', message)
-            messages_sent.append(event['id'])
+
+            message_template = Document("template.docx")
+
+            # TODO: Fill message_template indexes 0, 2, and 6 with appropriate info
+
+            # Append indexes 0-23 of the message_template to the output_document
+            # output_document.paragraphs.extend(message_template.paragraphs) doesn't work?? iterating over list instead
+            for paragraph in message_template.paragraphs:
+               output_document.add_paragraph(paragraph.text)
+            print(len(output_document.paragraphs))
+
+            # Add Separation lines between templates on output_document
+
+            # Increment current_template_index
+
+
+
+            # SendMessage(gmail_svc, 'me', message)
+            # messages_sent.append(event['id'])
     
+    print(len(output_document.paragraphs))
+
     if not messages_sent:
         print(f"All confirmation emails for next day ({len(already_sent)}) already sent! (RESENDING_EMAILS = FALSE)")
     else:
