@@ -244,6 +244,9 @@ def main():
             message_template = Document("template.docx")
 
             # TODO: Fill message_template indexes 0, 2, and 6 with appropriate info
+            message_template.paragraph[0].text = f"Hi {student_firstname}!"
+            message_template.paragraph[2].text = f"Thank you for scheduling your session with me. I am looking forward to our session on {event_date} {event_start} {event_end}."
+            message_template.paragraph[6].text = f"This session will take place here: {student_zoom}"
 
             # Append indexes 0-23 of the message_template to the output_document
             # output_document.paragraphs.extend(message_template.paragraphs) doesn't work?? iterating over list instead
