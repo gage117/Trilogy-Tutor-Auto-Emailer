@@ -179,7 +179,7 @@ def main():
     
     output_document = Document()
 
-    for event in tutoring_events:
+    for idx, event in enumerate(tutoring_events):
         if event['id'] not in already_sent:
             student_email = ""
             for attendee in event['attendees']:
@@ -242,14 +242,20 @@ def main():
 
             # TODO: Fill message_template indexes 0, 2, and 6 with appropriate info
             message_template.paragraphs[0].text = f"Hi {student_firstname}!"
-            message_template.paragraphs[2].text = f"Thank you for scheduling your session with me. I am looking forward to our session on {event_date} {event_start} {event_end}."
+            message_template.paragraphs[1].text = subject_text
+            message_template.paragraphs[2].text = f"Thank you for scheduling your session with me. I am looking forward to our session on {event_date} {event_start} - {event_end}."
+            message_template.paragraphs[3].text = student_email
             message_template.paragraphs[6].text = f"This session will take place here: {student_zoom}"
 
+            message_template.save(f"email{idx}.docx")
             # Append indexes 0-23 of the message_template to the output_document
             # output_document.paragraphs.extend(message_template.paragraphs) doesn't work?? iterating over list instead
-            for paragraph in message_template.paragraphs:
-               output_document.add_paragraph(paragraph.text)
-
+            # for idx, paragraph in enumerate(message_template.paragraphs): 
+            #    if idx == 11 or idx == 12 or idx == 13 or idx == 14:
+            #        output_document.paragraphs[len(output_document.paragraphs) - 1].style = "List Bullet"
+            #    else:
+            #        output_document.add_paragraph(paragraph.text)
+            
             # Add Separation lines between templates on output_document
             output_document.add_paragraph("")
             output_document.add_paragraph("------------------------------------------------")
