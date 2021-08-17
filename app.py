@@ -177,8 +177,6 @@ def main():
     # Send confirmation email for each event
     messages_sent = []
     
-    output_document = Document()
-
     for idx, event in enumerate(tutoring_events):
         if event['id'] not in already_sent:
             student_email = ""
@@ -257,15 +255,9 @@ def main():
             #        output_document.add_paragraph(paragraph.text)
             
             # Add Separation lines between templates on output_document
-            output_document.add_paragraph("")
-            output_document.add_paragraph("------------------------------------------------")
-            output_document.add_paragraph("")
 
             # SendMessage(gmail_svc, 'me', message)
             # messages_sent.append(event['id'])
-    
-    print(len(output_document.paragraphs))
-    output_document.save("output.docx")
 
     if not messages_sent:
         print(f"All confirmation emails for next day ({len(already_sent)}) already sent! (RESENDING_EMAILS = FALSE)")
