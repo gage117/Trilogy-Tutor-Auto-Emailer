@@ -1,0 +1,4 @@
+output/*
+db.json
+token.pickle
+__pycache__
