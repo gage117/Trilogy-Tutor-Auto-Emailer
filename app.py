@@ -245,7 +245,7 @@ def main():
             message_template.paragraphs[3].text = student_email
             message_template.paragraphs[6].text = f"This session will take place here: {student_zoom}"
 
-            message_template.save(f"email{idx}.docx")
+            message_template.save(f"output/email{idx}.docx")
             # Append indexes 0-23 of the message_template to the output_document
             # output_document.paragraphs.extend(message_template.paragraphs) doesn't work?? iterating over list instead
             # for idx, paragraph in enumerate(message_template.paragraphs): 
